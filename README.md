@@ -1,2 +1,2 @@
 # LinuxSpringDemo
-Playground for Spring Boot on Linux machine
+Playground for Spring Boot on Debian 11 machine

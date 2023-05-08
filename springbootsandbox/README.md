@@ -21,7 +21,7 @@ The goal of this project is to create 'hello world' environment and cover these 
     
     docker run -p 8081:8081 springbootsandbox:0.0.1-SNAPSHOT
     or
-    docker run -p 8081:8081 aburilovic/dockersandbox:0.0.1-SNAPSHO
+    docker run -p 8081:8081 aburilovic/dockersandbox:0.0.1-SNAPSHOT
     ```
 
 - Use existing MySQL image and connect it with previously created image

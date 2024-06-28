@@ -25,5 +25,5 @@ The goal of this project is to create 'hello world' environment and cover these 
     ```
 
 - Use existing MySQL image and connect it with previously created image
-- JMS (TBD)
+- Use Kafka as event streaming platform
 - Kubernetes (TBD)

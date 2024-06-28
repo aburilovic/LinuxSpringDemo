@@ -1,6 +1,8 @@
 package com.aburilovic.springbootsandbox.rest;
 
+import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -8,8 +10,20 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("api/v1/hello")
 public class HelloController {
 
-    @GetMapping("/hello")
+    final KafkaTemplate<String, String> template;
+
+    public HelloController(KafkaTemplate<String, String> template) {
+        this.template = template;
+    }
+
+    @GetMapping("")
     public String hello() {
         return "Hello from Spring Boot!";
+    }
+
+    @GetMapping("/msg/{val}")
+    public String messageKafka(@PathVariable("val") String value) {
+        template.send("STtopic1", value);
+        return value;
     }
 }

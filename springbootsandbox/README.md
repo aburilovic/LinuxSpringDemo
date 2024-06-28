@@ -26,4 +26,11 @@ The goal of this project is to create 'hello world' environment and cover these 
 
 - Use existing MySQL image and connect it with previously created image
 - Use Kafka as event streaming platform
+
+    ```
+    docker pull apache/kafka:3.7.0
+  
+    docker run -p 9092:9092 apache/kafka:3.7.0
+    ```
+
 - Kubernetes (TBD)

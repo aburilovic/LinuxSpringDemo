@@ -11,13 +11,11 @@ public class KafkaConfig {
 
     @Bean
     public NewTopic topic() {
-        return TopicBuilder.name("STtopic1")
-                .partitions(10)
-                .replicas(1)
+        return TopicBuilder.name("GovnoTopic")
                 .build();
     }
 
-    @KafkaListener(id = "myId", topics = "STtopic1")
+    @KafkaListener(id = "myId", topics = "GovnoTopic")
     public void listen(String in) {
         System.out.println("***************** "+ in);
     }

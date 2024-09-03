@@ -23,14 +23,23 @@ The goal of this project is to create 'hello world' environment and cover these 
     or
     docker run -p 8081:8081 aburilovic/dockersandbox:0.0.1-SNAPSHOT
     ```
+- Use Kafka as event streaming platform 🗸
+
+    ```
+    docker pull bitnami/kafka:3.0.2
+  
+    docker run -p 9092:9092 bitnami/kafka:3.0.2
+    ```
+
+- Use Docker compose to run kafka, zookeeper and spring boot app (run from 'docker' folder) 🗸
+
+    ```
+    docker compose up
+    docker compose down
+    ```
+
+- Kubernetes
+    * use previous docker image and run it locally on minikube with one Kubernetes deployment
+
 
 - Use existing MySQL image and connect it with previously created image
-- Use Kafka as event streaming platform
-
-    ```
-    docker pull apache/kafka:3.7.0
-  
-    docker run -p 9092:9092 apache/kafka:3.7.0
-    ```
-
-- Kubernetes (TBD)

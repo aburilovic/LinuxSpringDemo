@@ -23,7 +23,7 @@ public class HelloController {
 
     @GetMapping("/msg/{val}")
     public String messageKafka(@PathVariable("val") String value) {
-        template.send("STtopic1", value);
+        template.send("GovnoTopic", value);
         return value;
     }
 }

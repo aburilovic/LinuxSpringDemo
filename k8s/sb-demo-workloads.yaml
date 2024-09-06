@@ -1,0 +1,106 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: sb-demo
+  name: sb-demo
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: sb-demo
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: sb-demo
+    spec:
+      containers:
+      - image: aburilovic/dockersandbox:0.0.1-SNAPSHOT
+        name: sb-demo
+        resources: {}
+status: {}
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: zookeeper
+  name: zookeeper
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: zookeeper
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: zookeeper
+    spec:
+      containers:
+      - image: bitnami/zookeeper:3.7
+        name: zookeeper
+        env: 
+        - name: ALLOW_ANONYMOUS_LOGIN
+          value: "yes"
+        resources: {}
+status: {}
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: kafka
+  name: kafka
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: kafka
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: kafka
+    spec:
+      containers:
+      - image: bitnami/kafka:3.0.2
+        name: kafka
+        env: 
+        - name: ALLOW_PLAINTEXT_LISTENER
+          value: "yes"
+        - name: KAFKA_CFG_ZOOKEEPER_CONNECT
+          value: zookeeper:2181
+        - name: KAFKA_CFG_LISTENERS
+          value: PLAINTEXT://0.0.0.0:9092
+        - name: KAFKA_CFG_ADVERTISED_LISTENERS
+          value: PLAINTEXT://kafka:9092
+        resources: {}
+status: {}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -10,7 +10,7 @@ The goal of this project is to create 'hello world' environment and cover these 
   `./mvnw spring-boot:build-image`
 
 
-- Use Docker Hub to deploy new image 🗸
+- Docker Hub to deploy new image 🗸
 
     ```
     docker tag springbootsandbox:0.0.1-SNAPSHOT aburilovic/dockersandbox:0.0.1-SNAPSHOT
@@ -23,7 +23,7 @@ The goal of this project is to create 'hello world' environment and cover these 
     or
     docker run -p 8081:8081 aburilovic/dockersandbox:0.0.1-SNAPSHOT
     ```
-- Use Kafka as event streaming platform 🗸
+- Kafka as event streaming platform 🗸
 
     ```
     docker pull bitnami/kafka:3.0.2
@@ -31,15 +31,27 @@ The goal of this project is to create 'hello world' environment and cover these 
     docker run -p 9092:9092 bitnami/kafka:3.0.2
     ```
 
-- Use Docker compose to run kafka, zookeeper and spring boot app (run from 'docker' folder) 🗸
+- Docker compose to run Kafka, Zookeeper and Spring Boot app (run from 'docker' folder) 🗸
 
     ```
     docker compose up
     docker compose down
     ```
 
-- Kubernetes
-    * use previous docker image and run it locally on minikube with one Kubernetes deployment
+- Kubernetes to run previously created images 🗸
+  * to generate .yaml configuration use:
 
-
+      ```
+      kubectl create deployment sb-demo-deployment --image=aburilovic/dockersandbox:0.0.1-SNAPSHOT --dry-run=client -o=yaml > spring-boot-demo.yaml
+      kubectl create service nodeport service-sb-demo --tcp=8081:8081 --dry-run=client -o yaml > service-sb-demo.yaml
+      ```
+    or just write manually configuration to desired files (workloads.yaml, services.yaml etc.). Check 'kubernetes' folder.
+  
+  * apply those changes:
+      ```
+      kubectl apply -f sb-demo-workloads.yaml
+      kubectl apply -f sb-demo-services.yaml
+      ```
+  * logs can be check
+  
 - Use existing MySQL image and connect it with previously created image

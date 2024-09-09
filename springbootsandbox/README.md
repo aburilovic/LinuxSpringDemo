@@ -13,15 +13,15 @@ The goal of this project is to create 'hello world' environment and cover these 
 - Docker Hub to deploy new image 🗸
 
     ```
-    docker tag springbootsandbox:0.0.1-SNAPSHOT aburilovic/dockersandbox:0.0.1-SNAPSHOT
+    docker tag springbootsandbox:0.0.2 aburilovic/dockersandbox:0.0.2
     
     docker login
     
-    docker push aburilovic/dockersandbox:0.0.1-SNAPSHOT
+    docker push aburilovic/dockersandbox:0.0.2
     
-    docker run -p 8081:8081 springbootsandbox:0.0.1-SNAPSHOT
+    docker run -p 8081:8081 springbootsandbox:0.0.2
     or
-    docker run -p 8081:8081 aburilovic/dockersandbox:0.0.1-SNAPSHOT
+    docker run -p 8081:8081 aburilovic/dockersandbox:0.0.2
     ```
 - Kafka as event streaming platform 🗸
 

@@ -29,6 +29,9 @@ services:
       - "8081:8081"
     depends_on:
       - kafka
+    environment:
+      # Set the active profile here (dev or prod)
+      - SPRING_PROFILES_ACTIVE=prod
 
 networks:
   default:

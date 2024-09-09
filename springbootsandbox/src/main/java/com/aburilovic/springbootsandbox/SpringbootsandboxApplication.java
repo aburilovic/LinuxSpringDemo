@@ -16,8 +16,7 @@ public class SpringbootsandboxApplication {
 	@Bean
 	public ApplicationRunner runner(KafkaTemplate<String, String> template) {
 		return args -> {
-			template.send("GovnoTopic", "test from Main app");
+			template.send("MyKafkaTopic", "test from Main app");
 		};
 	}
-
 }

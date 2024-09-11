@@ -7,6 +7,7 @@ The goal of this project is to create 'hello world' environment and cover these 
 - Create Initial Spring Boot project using Maven 🗸
 - Add support for JPA with simple CRUD operations, use in-memory database like H2 🗸
 - Add simple Rest endpoints 🗸
+- Add unit and integration tests 🗸
 - Create docker image 🗸  
   `./mvnw spring-boot:build-image`
 

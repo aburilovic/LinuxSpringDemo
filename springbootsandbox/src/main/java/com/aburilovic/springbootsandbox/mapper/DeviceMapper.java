@@ -18,11 +18,12 @@ public class DeviceMapper {
         if (entity == null) {
             return null;
         }
-        DeviceDTO dto = new DeviceDTO();
-        dto.setDescription(entity.getDescription());
-        dto.setHardwareId(entity.getHardwareId());
-        dto.setSku(entity.getSku());
-        return dto;
+
+        return DeviceDTO.builder()
+                .sku(entity.getSku())
+                .hardwareId(entity.getHardwareId())
+                .description(entity.getDescription())
+                .build();
     }
 
     /**
@@ -35,15 +36,16 @@ public class DeviceMapper {
         if (deviceDTO == null) {
             return null;
         }
-        DeviceEntity deviceEntity = new DeviceEntity();
-        deviceEntity.setDescription(deviceDTO.getDescription());
-        deviceEntity.setHardwareId(deviceDTO.getHardwareId());
-        deviceEntity.setSku(deviceDTO.getSku());
-        return deviceEntity;
+        return DeviceEntity.builder()
+                .description(deviceDTO.getDescription())
+                .hardwareId(deviceDTO.getHardwareId())
+                .sku(deviceDTO.getSku())
+                .build();
     }
 
     /**
      * Static method to convert a list of entities to DTOs
+     *
      * @param entities - list of entities to be converted to the list of DTOs
      * @return
      */

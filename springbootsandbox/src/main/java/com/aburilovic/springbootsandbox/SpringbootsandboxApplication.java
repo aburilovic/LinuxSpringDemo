@@ -25,19 +25,17 @@ public class SpringbootsandboxApplication {
     @Bean
     public ApplicationRunner databaseStartupRunner(DeviceRepository deviceRepository) {
         return args -> {
-            DeviceEntity deviceEntity1 = new DeviceEntity();
-            deviceEntity1.setHardwareId("Samsung10");
-            deviceEntity1.setSku("SKU155");
-            deviceEntity1.setDescription("Regular device used in production");
-            deviceRepository.save(deviceEntity1);
+            deviceRepository.save(DeviceEntity.builder()
+                    .description("Regular device used in production")
+                    .hardwareId("Samsung10")
+                    .sku("SKU155")
+                    .build());
 
-
-            DeviceEntity deviceEntity2 = new DeviceEntity();
-            deviceEntity2.setHardwareId("Samsung12");
-            deviceEntity2.setSku("SKU188");
-            deviceEntity2.setDescription("Regular device used only in testing");
-            deviceRepository.save(deviceEntity2);
+            deviceRepository.save(DeviceEntity.builder()
+                    .description("Regular device used just for testing")
+                    .hardwareId("Samsung12")
+                    .sku("SKU188")
+                    .build());
         };
     }
-
 }

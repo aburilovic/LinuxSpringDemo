@@ -5,10 +5,10 @@ Simple Spring Boot project on Linux machine to test various technologies.
 The goal of this project is to create 'hello world' environment and cover these topics:
 
 - Create Initial Spring Boot project using Maven 🗸
-- Add simple Rest endpoint 🗸
+- Add support for JPA with simple CRUD operations, use in-memory database like H2 🗸
+- Add simple Rest endpoints 🗸
 - Create docker image 🗸  
   `./mvnw spring-boot:build-image`
-
 
 - Docker Hub to deploy new image 🗸
 

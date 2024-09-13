@@ -18,6 +18,7 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.mockito.ArgumentMatchers.any;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -42,12 +43,12 @@ class DeviceControllerTest {
     void setUp() {
         devices = new ArrayList<>();
         devices.add(DeviceDTO.builder()
-                .hardwareId("harware1")
+                .hardwareId("hardware1")
                 .sku("sku1")
                 .description("description 1")
                 .build());
         devices.add(DeviceDTO.builder()
-                .hardwareId("harware2")
+                .hardwareId("hardware2")
                 .sku("sku2")
                 .description("description 2")
                 .build());
@@ -80,7 +81,17 @@ class DeviceControllerTest {
         mockMvc.perform(MockMvcRequestBuilders.get("/api/v1/devices/all"))
                 .andExpect(status().isOk())
                 .andExpect(MockMvcResultMatchers.jsonPath("$").isArray())
-                .andExpect(MockMvcResultMatchers.jsonPath("$[0].hardwareId").value("harware1"))
-                .andExpect(MockMvcResultMatchers.jsonPath("$[1].hardwareId").value("harware2"));
+                .andExpect(MockMvcResultMatchers.jsonPath("$[0].hardwareId").value("hardware1"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$[1].hardwareId").value("hardware2"));
+    }
+
+    @Test
+    void getAllDevicesByHardwareId() throws Exception {
+        Mockito.when(deviceService.getDeviceByHardwareId(any())).thenReturn(DeviceDTO.builder().hardwareId("hardware1").build());
+
+        mockMvc.perform(MockMvcRequestBuilders.get("/api/v1/devices/hardwareId/hardware1"))
+                .andExpect(status().isOk())
+                .andExpect(MockMvcResultMatchers.jsonPath("$").isNotEmpty())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.hardwareId").value("hardware1"));
     }
 }

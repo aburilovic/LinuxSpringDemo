@@ -26,4 +26,12 @@ class SpringbootsandboxApplicationTests {
 				.andExpect(MockMvcResultMatchers.jsonPath("$[1].hardwareId").value("Samsung12"));
 	}
 
+	@Test
+	void testGetAllDevicesByHardwareId() throws Exception {
+		mockMvc.perform(MockMvcRequestBuilders.get("/api/v1/devices/hardwareId/Samsung12"))
+				.andExpect(status().isOk())
+				.andExpect(MockMvcResultMatchers.jsonPath("$").isNotEmpty())
+				.andExpect(MockMvcResultMatchers.jsonPath("$.hardwareId").value("Samsung12"));
+	}
+
 }

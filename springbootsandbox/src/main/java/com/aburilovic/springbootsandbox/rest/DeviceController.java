@@ -43,4 +43,16 @@ public class DeviceController {
         // Return 200 OK with the list of devices
         return ResponseEntity.ok(devices);
     }
+
+    @GetMapping("/hardwareId/{hardwareId}")
+    public ResponseEntity<DeviceDTO> getAllDevicesByHardwareId(@PathVariable("hardwareId") String hardwareId) {
+        final DeviceDTO device = deviceService.getDeviceByHardwareId(hardwareId);
+        if (device == null) {
+            // Return 204 No Content if the list is empty
+            return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+        }
+
+        // Return 200 OK with the list of devices
+        return ResponseEntity.ok(device);
+    }
 }

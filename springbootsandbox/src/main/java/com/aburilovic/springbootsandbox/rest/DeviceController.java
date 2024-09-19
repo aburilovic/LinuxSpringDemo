@@ -1,15 +1,13 @@
 package com.aburilovic.springbootsandbox.rest;
 
 import com.aburilovic.springbootsandbox.dto.DeviceDTO;
+import com.aburilovic.springbootsandbox.entity.DeviceEntity;
 import com.aburilovic.springbootsandbox.service.DeviceService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.kafka.core.KafkaTemplate;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -45,7 +43,7 @@ public class DeviceController {
     }
 
     @GetMapping("/hardwareId/{hardwareId}")
-    public ResponseEntity<DeviceDTO> getAllDevicesByHardwareId(@PathVariable("hardwareId") String hardwareId) {
+    public ResponseEntity<DeviceDTO> getAllDeviceByHardwareId(@PathVariable("hardwareId") String hardwareId) {
         final DeviceDTO device = deviceService.getDeviceByHardwareId(hardwareId);
         if (device == null) {
             // Return 204 No Content if the list is empty
@@ -54,5 +52,18 @@ public class DeviceController {
 
         // Return 200 OK with the list of devices
         return ResponseEntity.ok(device);
+    }
+
+    @PostMapping("/device")
+    public ResponseEntity<DeviceDTO> createDevice(@RequestBody DeviceDTO deviceDTO) {
+        DeviceEntity createdDevice = deviceService.createDevice(deviceDTO);
+
+        if (createdDevice == null) {
+            // Return 500 Internal Server Error if the creation fails
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+
+        // Return 201 Created with the created device data
+        return ResponseEntity.status(HttpStatus.CREATED).body(deviceDTO);
     }
 }

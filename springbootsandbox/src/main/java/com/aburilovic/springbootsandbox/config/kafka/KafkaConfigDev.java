@@ -1,6 +1,5 @@
 package com.aburilovic.springbootsandbox.config.kafka;
 
-import com.aburilovic.springbootsandbox.config.kafka.DummyKafkaTemplate;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;

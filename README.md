@@ -8,7 +8,7 @@ The goal of this project is to create 'hello world' environment and cover these 
 - Add support for JPA with simple CRUD operations, use in-memory database like H2 🗸
 - Add simple Rest endpoints 🗸
 - Add unit and integration tests 🗸
-- Create docker image 🗸  
+- Create docker image 🗸
   `./mvnw spring-boot:build-image`
 
 - Docker Hub to deploy new image 🗸
@@ -56,7 +56,7 @@ The goal of this project is to create 'hello world' environment and cover these 
   * use 'describe' command to check more details about specified pods, services and any other kubernetes working unit:
       ```
       kubectl describe kubectl logs pod/sb-demo-679b844f7b-nj2hr
-      ```    
+      ```
   * logs can be checked with kubernetes 'logs' command:
       ```
       kubectl logs kubectl logs pod/sb-demo-679b844f7b-nj2hr
@@ -64,4 +64,6 @@ The goal of this project is to create 'hello world' environment and cover these 
     'tail' option to check last N log entries, 'grep' to pipeline result for filtering.
   
 - Use existing MySQL image and connect it with previously created image
+
+- Add support for Spring Actuator and Springdoc Openapi 🗸
 

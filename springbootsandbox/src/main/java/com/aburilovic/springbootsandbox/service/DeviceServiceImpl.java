@@ -32,4 +32,10 @@ public class DeviceServiceImpl implements DeviceService {
         final Optional<DeviceEntity> deviceEntity = deviceRepository.findByHardwareId(hardwareId);
         return DeviceMapper.convertToDTO(deviceEntity.orElse(null));
     }
+
+    @Override
+    public DeviceEntity createDevice(DeviceDTO deviceDTO) {
+        DeviceEntity deviceEntity = DeviceMapper.convertToEntity(deviceDTO);
+        return deviceRepository.save(deviceEntity);
+    }
 }

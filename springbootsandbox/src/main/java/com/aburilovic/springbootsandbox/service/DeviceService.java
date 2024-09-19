@@ -10,5 +10,11 @@ public interface DeviceService {
     DeviceDTO getDeviceById(Long id);
     DeviceDTO getDeviceByHardwareId(String hardwareId);
 
+    DeviceDTO getDeviceBySku(String sku);
+
+    DeviceEntity getDeviceEntityBySku(String sku);
+
     DeviceEntity createDevice(DeviceDTO deviceDTO);
+
+    boolean deleteDeviceById(Long deviceId);
 }

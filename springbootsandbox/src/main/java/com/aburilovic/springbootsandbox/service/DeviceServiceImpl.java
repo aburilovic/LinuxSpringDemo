@@ -34,8 +34,29 @@ public class DeviceServiceImpl implements DeviceService {
     }
 
     @Override
+    public DeviceDTO getDeviceBySku(String sku) {
+        final Optional<DeviceEntity> deviceEntity = deviceRepository.findBySku(sku);
+        return DeviceMapper.convertToDTO(deviceEntity.orElse(null));
+    }
+
+    @Override
+    public DeviceEntity getDeviceEntityBySku(String sku) {
+        final Optional<DeviceEntity> deviceEntity = deviceRepository.findBySku(sku);
+        return deviceEntity.orElse(null);
+    }
+
+    @Override
     public DeviceEntity createDevice(DeviceDTO deviceDTO) {
         DeviceEntity deviceEntity = DeviceMapper.convertToEntity(deviceDTO);
         return deviceRepository.save(deviceEntity);
+    }
+
+    @Override
+    public boolean deleteDeviceById(Long id) {
+        if (deviceRepository.existsById(id)) {
+            deviceRepository.deleteById(id);
+            return true;
+        }
+        return false;
     }
 }

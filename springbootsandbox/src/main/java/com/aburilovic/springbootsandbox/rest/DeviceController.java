@@ -43,8 +43,20 @@ public class DeviceController {
     }
 
     @GetMapping("/hardwareId/{hardwareId}")
-    public ResponseEntity<DeviceDTO> getAllDeviceByHardwareId(@PathVariable("hardwareId") String hardwareId) {
+    public ResponseEntity<DeviceDTO> getDeviceByHardwareId(@PathVariable("hardwareId") String hardwareId) {
         final DeviceDTO device = deviceService.getDeviceByHardwareId(hardwareId);
+        if (device == null) {
+            // Return 204 No Content if the list is empty
+            return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+        }
+
+        // Return 200 OK with the list of devices
+        return ResponseEntity.ok(device);
+    }
+
+    @GetMapping("/sku/{sku}")
+    public ResponseEntity<DeviceDTO> getDeviceBySku(@PathVariable("sku") String sku) {
+        final DeviceDTO device = deviceService.getDeviceBySku(sku);
         if (device == null) {
             // Return 204 No Content if the list is empty
             return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
@@ -65,5 +77,20 @@ public class DeviceController {
 
         // Return 201 Created with the created device data
         return ResponseEntity.status(HttpStatus.CREATED).body(deviceDTO);
+    }
+
+    @DeleteMapping("/device/sku/{sku}")
+    public ResponseEntity<Void> deleteDevice(@PathVariable("sku") String sku) {
+        DeviceEntity deviceEntity = deviceService.getDeviceEntityBySku(sku);
+        if (deviceEntity == null) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
+        boolean isDeleted = deviceService.deleteDeviceById(deviceEntity.getId());
+
+        if (isDeleted) {
+            return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+        }
+
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
     }
 }

@@ -62,8 +62,40 @@ The goal of this project is to create 'hello world' environment and cover these 
       kubectl logs kubectl logs pod/sb-demo-679b844f7b-nj2hr
       ```
     'tail' option to check last N log entries, 'grep' to pipeline result for filtering.
-  
-- Use existing MySQL image and connect it with previously created image
 
 - Add support for Spring Actuator and Springdoc Openapi 🗸
-
+- Add support for OAuth2 (Keycloak) 🗸
+  * run initial keycloak server and mount dev directory to persist keycloak data (make sure directory has valid permissions):
+      ```
+      docker run -d --name keycloak \ 
+      -p 8080:8080 \
+      -e KEYCLOAK_ADMIN=admin \
+      -e KEYCLOAK_ADMIN_PASSWORD=admin \
+      -v $(pwd)/keycloak_data:/opt/keycloak/data \
+      quay.io/keycloak/keycloak:25.0.6 start-dev
+      ```
+  * generate realm and all the clients, roles, users...
+  * stop and remove the keycloak container
+      ```
+      docker stop keycloak
+      docker rm keycloak
+      ```
+  * run export command to get all configuration (including users) in one file (keycloak_export) and make sure directories has valid permissions:
+      ```
+      docker run --rm \
+      -e KEYCLOAK_ADMIN=admin \
+      -e KEYCLOAK_ADMIN_PASSWORD=admin \
+      -v $(pwd)/keycloak_data:/opt/keycloak/data \
+      -v $(pwd)/keycloak_export:/opt/keycloak/data/import \
+      quay.io/keycloak/keycloak:25.0.6 \
+      export --realm sp-demo --dir /opt/keycloak/data/import --users realm_file
+      ```
+  * run another keycloak instance and consume exported configuration (simulates using the same config for another dev environment):
+      ```
+      docker run -d --name keycloak \
+      -p 8080:8080 \
+      -e KEYCLOAK_ADMIN=admin \
+      -e KEYCLOAK_ADMIN_PASSWORD=admin \
+      -v $(pwd)/keycloak_export:/opt/keycloak/data/import \
+      quay.io/keycloak/keycloak:25.0.6 start-dev --import-realm
+      ```

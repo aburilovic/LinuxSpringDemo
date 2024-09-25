@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.kafka.core.KafkaTemplate;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -19,7 +20,7 @@ public class DeviceController {
     private final DeviceService deviceService;
     private final KafkaTemplate<String, String> template;
 
-    @GetMapping("")
+    @GetMapping("/home")
     public String hello() {
         return "Hello from Spring Boot Device Controller!";
     }
@@ -30,6 +31,7 @@ public class DeviceController {
         return value;
     }
 
+    @PreAuthorize("hasRole('User')")
     @GetMapping("all")
     public ResponseEntity<List<DeviceDTO>> getAllDevices() {
         final List<DeviceDTO> devices = deviceService.getAllDevices();
@@ -42,6 +44,7 @@ public class DeviceController {
         return ResponseEntity.ok(devices);
     }
 
+    @PreAuthorize("hasAnyRole('Admin', 'DeviceManager')")
     @GetMapping("/hardwareId/{hardwareId}")
     public ResponseEntity<DeviceDTO> getDeviceByHardwareId(@PathVariable("hardwareId") String hardwareId) {
         final DeviceDTO device = deviceService.getDeviceByHardwareId(hardwareId);
@@ -54,6 +57,7 @@ public class DeviceController {
         return ResponseEntity.ok(device);
     }
 
+    @PreAuthorize("hasAnyRole('Admin', 'DeviceManager')")
     @GetMapping("/sku/{sku}")
     public ResponseEntity<DeviceDTO> getDeviceBySku(@PathVariable("sku") String sku) {
         final DeviceDTO device = deviceService.getDeviceBySku(sku);
@@ -66,6 +70,12 @@ public class DeviceController {
         return ResponseEntity.ok(device);
     }
 
+    /**
+     * Only Admin can create device.
+     * @param deviceDTO
+     * @return
+     */
+    @PreAuthorize("hasRole('Admin')")
     @PostMapping("/device")
     public ResponseEntity<DeviceDTO> createDevice(@RequestBody DeviceDTO deviceDTO) {
         DeviceEntity createdDevice = deviceService.createDevice(deviceDTO);
@@ -79,6 +89,12 @@ public class DeviceController {
         return ResponseEntity.status(HttpStatus.CREATED).body(deviceDTO);
     }
 
+    /**
+     * Only device manager can delete the device.
+     * @param sku
+     * @return
+     */
+    @PreAuthorize("hasRole('DeviceManager')")
     @DeleteMapping("/device/sku/{sku}")
     public ResponseEntity<Void> deleteDevice(@PathVariable("sku") String sku) {
         DeviceEntity deviceEntity = deviceService.getDeviceEntityBySku(sku);

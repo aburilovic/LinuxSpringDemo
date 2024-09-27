@@ -1,4 +1,4 @@
-package com.aburilovic.springbootsandbox.config.kafka;
+package com.aburilovic.springbootsandbox.config.dev;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

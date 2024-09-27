@@ -21,7 +21,7 @@ public class DeviceController {
     private final KafkaTemplate<String, String> template;
 
     @GetMapping("/home")
-    public String hello() {
+    public String home() {
         return "Hello from Spring Boot Device Controller!";
     }
 

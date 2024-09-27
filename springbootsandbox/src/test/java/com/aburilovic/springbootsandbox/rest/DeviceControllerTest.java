@@ -13,6 +13,7 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.kafka.core.KafkaTemplate;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
@@ -20,13 +21,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.when;
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
-import static org.mockito.Mockito.doReturn;
-import static org.mockito.ArgumentMatchers.anyString;
 
+/**
+ * This test just partially loads spring context to tests Rest layer mostly focusing on input and output testing.
+ * Security is mostly ignored, PreAuthorized method level annotation where role is verified is being ignored.
+ * Security (Authentication and Authorization) is tested with the integration tests.
+ */
 @WebMvcTest(DeviceController.class)
+@WithMockUser(username = "testUser")
 class DeviceControllerTest {
 
     private static final String BASE_URL = "/api/v1/devices/";
@@ -80,7 +88,7 @@ class DeviceControllerTest {
 
     @Test
     void hello() throws Exception {
-        mockMvc.perform(MockMvcRequestBuilders.get(BASE_URL))
+        mockMvc.perform(MockMvcRequestBuilders.get(BASE_URL + "home"))
                 .andExpect(status().isOk())
                 .andExpect(content().string("Hello from Spring Boot Device Controller!"));
     }
@@ -121,6 +129,7 @@ class DeviceControllerTest {
         when(deviceService.createDevice(any(DeviceDTO.class))).thenReturn(deviceEntity);
 
         mockMvc.perform(post(BASE_URL + "device")
+                        .with(csrf())
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(deviceDTO)))
                 .andExpect(status().isCreated())
@@ -133,6 +142,7 @@ class DeviceControllerTest {
         when(deviceService.createDevice(any(DeviceDTO.class))).thenReturn(null);
 
         mockMvc.perform(post(BASE_URL + "device")
+                        .with(csrf())
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(deviceDTO)))
                 .andExpect(status().isInternalServerError());
@@ -148,6 +158,7 @@ class DeviceControllerTest {
         when(deviceService.deleteDeviceById(1L)).thenReturn(true);
 
         mockMvc.perform(MockMvcRequestBuilders.delete(BASE_URL + "device/sku/12345")
+                        .with(csrf())
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isNoContent());
     }
@@ -157,6 +168,7 @@ class DeviceControllerTest {
         when(deviceService.getDeviceEntityBySku(anyString())).thenReturn(null);
 
         mockMvc.perform(MockMvcRequestBuilders.delete(BASE_URL + "device/sku/12345")
+                        .with(csrf())
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isNotFound());
     }
@@ -171,6 +183,7 @@ class DeviceControllerTest {
         doReturn(false).when(deviceService).deleteDeviceById(1L);
 
         mockMvc.perform(MockMvcRequestBuilders.delete(BASE_URL + "device/sku/12345")
+                        .with(csrf())
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isNotFound());
     }

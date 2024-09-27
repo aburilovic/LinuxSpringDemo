@@ -1,4 +1,4 @@
-package com.aburilovic.springbootsandbox.config.kafka;
+package com.aburilovic.springbootsandbox.config;
 
 import org.apache.kafka.clients.admin.NewTopic;
 import org.springframework.context.annotation.Bean;

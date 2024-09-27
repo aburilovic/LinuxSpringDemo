@@ -1,6 +1,7 @@
 package com.aburilovic.springbootsandbox.config;
 
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Profile;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -16,6 +17,7 @@ import java.util.Map;
 
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true, securedEnabled = true)  // Enable @PreAuthorize and @Secured
+@Profile("!disable-security")
 public class SecurityConfig {
 
     @Bean

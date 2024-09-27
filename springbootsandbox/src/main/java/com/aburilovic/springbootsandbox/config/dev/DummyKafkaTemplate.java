@@ -1,4 +1,4 @@
-package com.aburilovic.springbootsandbox.config.kafka;
+package com.aburilovic.springbootsandbox.config.dev;
 
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.kafka.core.ProducerFactory;

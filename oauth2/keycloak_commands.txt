@@ -28,3 +28,12 @@ docker run -d --name keycloak \
   -v $(pwd)/keycloak_export:/opt/keycloak/data/import \
   quay.io/keycloak/keycloak:25.0.6 start-dev --import-realm
 
+
+
+******* when running with Docker compose or with Kubernetes one manual change needed:
+go to realm settings for your realm within kubectl pod, link is something like:
+http://192.168.49.2:32080/admin/master/console/#/sp-demo/realm-settings
+
+Update frontend URL to: http://keycloak:8080
+
+This shouldn't be needed if we export this with original keycloak configuration

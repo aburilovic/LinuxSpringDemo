@@ -18,7 +18,7 @@ spec:
         app: sb-demo
     spec:
       containers:
-      - image: aburilovic/dockersandbox:0.0.2
+      - image: aburilovic/dockersandbox:1.0.5
         name: sb-demo
         env: 
         - name: SPRING_PROFILES_ACTIVE
@@ -92,10 +92,43 @@ spec:
         resources: {}
 status: {}
 
+---
 
-
-
-
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: keycloak
+  labels:
+    app: keycloak
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: keycloak
+  template:
+    metadata:
+      labels:
+        app: keycloak
+    spec:
+      containers:
+      - name: keycloak
+        image: quay.io/keycloak/keycloak:25.0.6
+        args: ["start-dev", "--import-realm"]
+        env:
+        - name: KEYCLOAK_ADMIN
+          value: "admin"
+        - name: KEYCLOAK_ADMIN_PASSWORD
+          value: "admin"
+        ports:
+        - containerPort: 8080
+        volumeMounts:
+        - name: keycloak-export-volume
+          mountPath: /opt/keycloak/data/import
+      volumes:
+      - name: keycloak-export-volume
+        hostPath:
+          path: /mnt/keycloak_export
+          type: Directory
 
 
 

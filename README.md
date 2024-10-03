@@ -14,15 +14,15 @@ The goal of this project is to create 'hello world' environment and cover these 
 - Docker Hub to deploy new image 🗸
 
     ```
-    docker tag springbootsandbox:0.0.2 aburilovic/dockersandbox:0.0.2
+    docker tag springbootsandbox:1.0.5 aburilovic/dockersandbox:1.0.5
     
     docker login
     
-    docker push aburilovic/dockersandbox:0.0.2
+    docker push aburilovic/dockersandbox:1.0.5
     
-    docker run -p 8081:8081 springbootsandbox:0.0.2
+    docker run -p 8081:8081 springbootsandbox:1.0.5
     or
-    docker run -p 8081:8081 aburilovic/dockersandbox:0.0.2
+    docker run -p 8081:8081 aburilovic/dockersandbox:1.0.5
     ```
 - Kafka as event streaming platform 🗸
 
@@ -92,10 +92,26 @@ The goal of this project is to create 'hello world' environment and cover these 
       ```
   * run another keycloak instance and consume exported configuration (simulates using the same config for another dev environment):
       ```
-      docker run -d --name keycloak \
-      -p 8080:8080 \
+      docker run -d --name keycloak-dev \
+      -p 8085:8080 \
       -e KEYCLOAK_ADMIN=admin \
       -e KEYCLOAK_ADMIN_PASSWORD=admin \
       -v $(pwd)/keycloak_export:/opt/keycloak/data/import \
       quay.io/keycloak/keycloak:25.0.6 start-dev --import-realm
       ```
+  * to Login with Keycloak first obtain token using some client like Postman:
+      ```
+      POST http://192.168.49.2:32080/realms/sp-demo/protocol/openid-connect/token
+      Body:
+      grant_type:password
+      grant_type:password
+      client_id:sb-demo-client
+      username:sb-demo-user
+      password:1111
+      client_secret:YAlyoENIUHBMufTZEU8EW1cIKWrU5JsJ
+      ```
+  * use provided access token with other API requests that are secured
+      ```
+      For Authorization specify Bearer access_token
+      ```
+  * use https://jwt.io/ to decode the token and check various fields like 'allowed-origins', 'realm_access', 'scope' etc.

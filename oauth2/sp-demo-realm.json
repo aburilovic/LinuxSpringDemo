@@ -410,7 +410,14 @@
     "createdTimestamp" : 1727194628016,
     "enabled" : true,
     "totp" : false,
-    "credentials" : [ ],
+    "credentials" : [ {
+      "id" : "25db49f9-7c6c-4010-ab1c-3b9a0c3dfbef",
+      "type" : "password",
+      "userLabel" : "My password",
+      "createdDate" : 1727264621795,
+      "secretData" : "{\"value\":\"5VJkwc3zT4Ngaif86YI7CJ/m5ho88DUPzRqalq6q8G8=\",\"salt\":\"divWHwWYsIT+oH1JjvZOVg==\",\"additionalParameters\":{}}",
+      "credentialData" : "{\"hashIterations\":5,\"algorithm\":\"argon2\",\"additionalParameters\":{\"hashLength\":[\"32\"],\"memory\":[\"7168\"],\"type\":[\"id\"],\"version\":[\"1.3\"],\"parallelism\":[\"1\"]}}"
+    } ],
     "disableableCredentialTypes" : [ ],
     "requiredActions" : [ ],
     "realmRoles" : [ "User" ],
@@ -426,7 +433,14 @@
     "createdTimestamp" : 1727194675745,
     "enabled" : true,
     "totp" : false,
-    "credentials" : [ ],
+    "credentials" : [ {
+      "id" : "7f0997d5-5136-4506-bcc0-e45b966706e6",
+      "type" : "password",
+      "userLabel" : "My password",
+      "createdDate" : 1727266916320,
+      "secretData" : "{\"value\":\"OvCx01N/EjwGlDv2WOFQRAkU90thggatJ/cKKhKfLTU=\",\"salt\":\"+PKVnIFkXiRCv9w2xFoZlg==\",\"additionalParameters\":{}}",
+      "credentialData" : "{\"hashIterations\":5,\"algorithm\":\"argon2\",\"additionalParameters\":{\"hashLength\":[\"32\"],\"memory\":[\"7168\"],\"type\":[\"id\"],\"version\":[\"1.3\"],\"parallelism\":[\"1\"]}}"
+    } ],
     "disableableCredentialTypes" : [ ],
     "requiredActions" : [ ],
     "realmRoles" : [ "User" ],
@@ -442,7 +456,14 @@
     "createdTimestamp" : 1727194535405,
     "enabled" : true,
     "totp" : false,
-    "credentials" : [ ],
+    "credentials" : [ {
+      "id" : "b573f3f7-a9b2-4ae1-b820-e42853d5c0a3",
+      "type" : "password",
+      "userLabel" : "My password",
+      "createdDate" : 1727261913892,
+      "secretData" : "{\"value\":\"49uICf0PMYJCce9NdRFkANf691quaN/JEdeuMshYru0=\",\"salt\":\"8Zc/ci+GJ6vwvpy1683uXA==\",\"additionalParameters\":{}}",
+      "credentialData" : "{\"hashIterations\":5,\"algorithm\":\"argon2\",\"additionalParameters\":{\"hashLength\":[\"32\"],\"memory\":[\"7168\"],\"type\":[\"id\"],\"version\":[\"1.3\"],\"parallelism\":[\"1\"]}}"
+    } ],
     "disableableCredentialTypes" : [ ],
     "requiredActions" : [ ],
     "realmRoles" : [ "Admin" ],
@@ -458,7 +479,14 @@
     "createdTimestamp" : 1727194586687,
     "enabled" : true,
     "totp" : false,
-    "credentials" : [ ],
+    "credentials" : [ {
+      "id" : "5ad15fca-81ce-46e8-8b44-967ec6f5bf7f",
+      "type" : "password",
+      "userLabel" : "My password",
+      "createdDate" : 1727266940210,
+      "secretData" : "{\"value\":\"jBvQuccojzj+0IbBBbb65rV6jmI5zISsffEby++3tNw=\",\"salt\":\"SeRvu175+Kaf8VY7Q4Mvfg==\",\"additionalParameters\":{}}",
+      "credentialData" : "{\"hashIterations\":5,\"algorithm\":\"argon2\",\"additionalParameters\":{\"hashLength\":[\"32\"],\"memory\":[\"7168\"],\"type\":[\"id\"],\"version\":[\"1.3\"],\"parallelism\":[\"1\"]}}"
+    } ],
     "disableableCredentialTypes" : [ ],
     "requiredActions" : [ ],
     "realmRoles" : [ "DeviceManager" ],
@@ -564,7 +592,9 @@
     "publicClient" : true,
     "frontchannelLogout" : false,
     "protocol" : "openid-connect",
-    "attributes" : { },
+    "attributes" : {
+      "post.logout.redirect.uris" : "+"
+    },
     "authenticationFlowBindingOverrides" : { },
     "fullScopeAllowed" : false,
     "nodeReRegistrationTimeout" : 0,
@@ -590,7 +620,9 @@
     "publicClient" : false,
     "frontchannelLogout" : false,
     "protocol" : "openid-connect",
-    "attributes" : { },
+    "attributes" : {
+      "post.logout.redirect.uris" : "+"
+    },
     "authenticationFlowBindingOverrides" : { },
     "fullScopeAllowed" : false,
     "nodeReRegistrationTimeout" : 0,
@@ -616,7 +648,9 @@
     "publicClient" : false,
     "frontchannelLogout" : false,
     "protocol" : "openid-connect",
-    "attributes" : { },
+    "attributes" : {
+      "post.logout.redirect.uris" : "+"
+    },
     "authenticationFlowBindingOverrides" : { },
     "fullScopeAllowed" : false,
     "nodeReRegistrationTimeout" : 0,
@@ -634,6 +668,7 @@
     "enabled" : true,
     "alwaysDisplayInConsole" : false,
     "clientAuthenticatorType" : "client-secret",
+    "secret" : "YAlyoENIUHBMufTZEU8EW1cIKWrU5JsJ",
     "redirectUris" : [ "/*" ],
     "webOrigins" : [ "/*" ],
     "notBefore" : 0,
@@ -643,13 +678,16 @@
     "implicitFlowEnabled" : false,
     "directAccessGrantsEnabled" : true,
     "serviceAccountsEnabled" : false,
-    "publicClient" : true,
+    "publicClient" : false,
     "frontchannelLogout" : true,
     "protocol" : "openid-connect",
     "attributes" : {
       "oidc.ciba.grant.enabled" : "false",
+      "client.secret.creation.time" : "1727261625",
       "backchannel.logout.session.required" : "true",
+      "post.logout.redirect.uris" : "+",
       "oauth2.device.authorization.grant.enabled" : "true",
+      "display.on.consent.screen" : "false",
       "backchannel.logout.revoke.offline.tokens" : "false"
     },
     "authenticationFlowBindingOverrides" : { },
@@ -978,8 +1016,9 @@
       "consentRequired" : false,
       "config" : {
         "user.session.note" : "AUTH_TIME",
-        "id.token.claim" : "true",
         "introspection.token.claim" : "true",
+        "userinfo.token.claim" : "true",
+        "id.token.claim" : "true",
         "access.token.claim" : "true",
         "claim.name" : "auth_time",
         "jsonType.label" : "long"
@@ -1186,7 +1225,8 @@
       "config" : {
         "id.token.claim" : "true",
         "introspection.token.claim" : "true",
-        "access.token.claim" : "true"
+        "access.token.claim" : "true",
+        "userinfo.token.claim" : "true"
       }
     } ]
   }, {
@@ -1222,6 +1262,7 @@
       "config" : {
         "introspection.token.claim" : "true",
         "multivalued" : "true",
+        "userinfo.token.claim" : "true",
         "user.attribute" : "foo",
         "id.token.claim" : "true",
         "access.token.claim" : "true",
@@ -1265,7 +1306,7 @@
       "subType" : "anonymous",
       "subComponents" : { },
       "config" : {
-        "allowed-protocol-mapper-types" : [ "saml-user-attribute-mapper", "saml-user-property-mapper", "saml-role-list-mapper", "oidc-address-mapper", "oidc-full-name-mapper", "oidc-sha256-pairwise-sub-mapper", "oidc-usermodel-attribute-mapper", "oidc-usermodel-property-mapper" ]
+        "allowed-protocol-mapper-types" : [ "oidc-full-name-mapper", "saml-user-property-mapper", "oidc-sha256-pairwise-sub-mapper", "saml-role-list-mapper", "oidc-usermodel-attribute-mapper", "oidc-usermodel-property-mapper", "saml-user-attribute-mapper", "oidc-address-mapper" ]
       }
     }, {
       "id" : "59164c51-d5b7-436d-bd46-08f2af9492e8",
@@ -1318,7 +1359,7 @@
       "subType" : "authenticated",
       "subComponents" : { },
       "config" : {
-        "allowed-protocol-mapper-types" : [ "oidc-usermodel-property-mapper", "saml-user-property-mapper", "oidc-usermodel-attribute-mapper", "saml-role-list-mapper", "saml-user-attribute-mapper", "oidc-sha256-pairwise-sub-mapper", "oidc-address-mapper", "oidc-full-name-mapper" ]
+        "allowed-protocol-mapper-types" : [ "saml-role-list-mapper", "oidc-address-mapper", "oidc-usermodel-property-mapper", "oidc-usermodel-attribute-mapper", "oidc-sha256-pairwise-sub-mapper", "saml-user-property-mapper", "oidc-full-name-mapper", "saml-user-attribute-mapper" ]
       }
     } ],
     "org.keycloak.keys.KeyProvider" : [ {
@@ -1922,13 +1963,18 @@
   "firstBrokerLoginFlow" : "first broker login",
   "attributes" : {
     "cibaBackchannelTokenDeliveryMode" : "poll",
-    "cibaExpiresIn" : "120",
     "cibaAuthRequestedUserHint" : "login_hint",
-    "oauth2DeviceCodeLifespan" : "600",
+    "clientOfflineSessionMaxLifespan" : "0",
     "oauth2DevicePollingInterval" : "5",
-    "parRequestUriLifespan" : "60",
+    "clientSessionIdleTimeout" : "0",
+    "clientOfflineSessionIdleTimeout" : "0",
     "cibaInterval" : "5",
-    "realmReusableOtpCode" : "false"
+    "realmReusableOtpCode" : "false",
+    "cibaExpiresIn" : "120",
+    "oauth2DeviceCodeLifespan" : "600",
+    "parRequestUriLifespan" : "60",
+    "clientSessionMaxLifespan" : "0",
+    "organizationsEnabled" : "false"
   },
   "keycloakVersion" : "25.0.6",
   "userManagedAccessAllowed" : false,

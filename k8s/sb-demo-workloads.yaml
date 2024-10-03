@@ -127,7 +127,8 @@ spec:
       volumes:
       - name: keycloak-export-volume
         hostPath:
-          path: /mnt/keycloak_export
+          #minikube mount needed -> minikube mount /home/aburilovic/keycloak_export:/mnt/keycloak_export
+          path: /mnt/keycloak_export 
           type: Directory
 
 

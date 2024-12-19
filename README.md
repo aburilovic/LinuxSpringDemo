@@ -63,7 +63,11 @@ The goal of this project is to create 'hello world' environment and cover these 
       ```
     'tail' option to check last N log entries, 'grep' to pipeline result for filtering.
 
-- Add support for Spring Actuator and Springdoc Openapi 🗸
+- Add support for Spring Actuator and Springdoc Openapi (Swagger UI) 🗸
+      
+      Actuator url: /actuator/metrics/{metric-name}
+      Swagger UI: /swagger-ui/index.html
+      
 - Add support for OAuth2 (Keycloak) 🗸
   * run initial keycloak server and mount dev directory to persist keycloak data (make sure directory has valid permissions):
       ```
@@ -99,7 +103,7 @@ The goal of this project is to create 'hello world' environment and cover these 
       -v $(pwd)/keycloak_export:/opt/keycloak/data/import \
       quay.io/keycloak/keycloak:25.0.6 start-dev --import-realm
       ```
-  * to Login with Keycloak first obtain token using some client like Postman:
+  * to Login with Keycloak, first obtain token using some client like Postman:
       ```
       POST http://192.168.49.2:32080/realms/sp-demo/protocol/openid-connect/token
       Body:
@@ -115,3 +119,5 @@ The goal of this project is to create 'hello world' environment and cover these 
       For Authorization specify Bearer access_token
       ```
   * use https://jwt.io/ to decode the token and check various fields like 'allowed-origins', 'realm_access', 'scope' etc.
+
+- Add support for Spring Reactive 🗸

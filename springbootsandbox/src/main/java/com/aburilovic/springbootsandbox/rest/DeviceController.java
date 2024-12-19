@@ -4,6 +4,7 @@ import com.aburilovic.springbootsandbox.dto.DeviceDTO;
 import com.aburilovic.springbootsandbox.entity.DeviceEntity;
 import com.aburilovic.springbootsandbox.service.DeviceService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.kafka.core.KafkaTemplate;
@@ -15,6 +16,7 @@ import java.util.List;
 @RestController
 @RequestMapping("api/v1/devices")
 @RequiredArgsConstructor
+@Slf4j
 public class DeviceController {
 
     private final DeviceService deviceService;
@@ -34,6 +36,7 @@ public class DeviceController {
     @PreAuthorize("hasRole('User')")
     @GetMapping("all")
     public ResponseEntity<List<DeviceDTO>> getAllDevices() {
+        log.info("Received request for /all");
         final List<DeviceDTO> devices = deviceService.getAllDevices();
         if (devices.isEmpty()) {
             // Return 204 No Content if the list is empty
@@ -47,6 +50,7 @@ public class DeviceController {
     @PreAuthorize("hasAnyRole('Admin', 'DeviceManager')")
     @GetMapping("/hardwareId/{hardwareId}")
     public ResponseEntity<DeviceDTO> getDeviceByHardwareId(@PathVariable("hardwareId") String hardwareId) {
+        log.info("Received request for /hardwareId/{hardwareId} with parameter: {}", hardwareId);
         final DeviceDTO device = deviceService.getDeviceByHardwareId(hardwareId);
         if (device == null) {
             // Return 204 No Content if the list is empty
@@ -60,6 +64,7 @@ public class DeviceController {
     @PreAuthorize("hasAnyRole('Admin', 'DeviceManager')")
     @GetMapping("/sku/{sku}")
     public ResponseEntity<DeviceDTO> getDeviceBySku(@PathVariable("sku") String sku) {
+        log.info("Received request for /sku/{sku} with parameter: {}", sku);
         final DeviceDTO device = deviceService.getDeviceBySku(sku);
         if (device == null) {
             // Return 204 No Content if the list is empty
@@ -78,6 +83,7 @@ public class DeviceController {
     @PreAuthorize("hasRole('Admin')")
     @PostMapping("/device")
     public ResponseEntity<DeviceDTO> createDevice(@RequestBody DeviceDTO deviceDTO) {
+        log.info("Received POST request for /device with request body: {}", deviceDTO);
         DeviceEntity createdDevice = deviceService.createDevice(deviceDTO);
 
         if (createdDevice == null) {
@@ -97,6 +103,7 @@ public class DeviceController {
     @PreAuthorize("hasRole('DeviceManager')")
     @DeleteMapping("/device/sku/{sku}")
     public ResponseEntity<Void> deleteDevice(@PathVariable("sku") String sku) {
+        log.info("Received DELETE request for /device/sku/{sku} with parameter: {}", sku);
         DeviceEntity deviceEntity = deviceService.getDeviceEntityBySku(sku);
         if (deviceEntity == null) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();

@@ -121,3 +121,5 @@ The goal of this project is to create 'hello world' environment and cover these 
   * use https://jwt.io/ to decode the token and check various fields like 'allowed-origins', 'realm_access', 'scope' etc.
 
 - Add support for Spring Reactive 🗸
+
+- Add support for simple Vue Application that consumes Spring Boot API 🗸

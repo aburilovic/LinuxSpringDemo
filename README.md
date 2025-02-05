@@ -123,3 +123,6 @@ The goal of this project is to create 'hello world' environment and cover these 
 - Add support for Spring Reactive 🗸
 
 - Add support for simple Vue Application that consumes Spring Boot API 🗸
+- Add support for simple AI chat model 🗸
+  * add rest API endpoint that will make request to some Huggingface LLM model (e.g. Deepseek R1) and return response
+  * display result in Vue client

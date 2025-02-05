@@ -5,8 +5,10 @@
       <button @click="fetchData">Call Hello API</button>
       <button @click="clearResponse">Clear response</button>
     </div>
-    <p v-if="result">API Response: {{ result }}</p>
-    <p v-if="error" style="color: red;">Error: {{ error }}</p>
+    <div>
+      <p v-if="result">API Response: {{ result }}</p>
+      <p v-if="error" class="error">Error: {{ error }}</p>
+    </div>
   </div>
 </template>
 
@@ -39,7 +41,7 @@ export default {
         console.error("Error fetching data:", err);
         this.error = err.response?.data || "Unable to fetch data";
       }
-    }
+    },
   },
 };
 </script>

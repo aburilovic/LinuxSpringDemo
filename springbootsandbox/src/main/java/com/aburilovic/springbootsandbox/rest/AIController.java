@@ -37,6 +37,10 @@ public class AIController {
 
         final Map<String, Object> body = new HashMap<>();
         body.put("inputs", input);
+        final Map<String, Object> parameters = new HashMap<>();
+        parameters.put("max_new_tokens", 100);
+        parameters.put("temperature", 0.1);
+        body.put("parameters", parameters);
 
         final HttpEntity<Map<String, Object>> request = new HttpEntity<>(body, headers);
         final ResponseEntity<String> response = restTemplate.exchange(

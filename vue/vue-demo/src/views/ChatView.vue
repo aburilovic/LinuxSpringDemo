@@ -87,7 +87,7 @@ export default {
         .replace(/\n/g, "<br>") // Single newline -> Line break
         .replace(/- \*\*(.*?)\*\*/g, "<li><strong>$1</strong></li>") // Convert bold bullet points
         .replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>") // Convert **bold** to <strong>
-        .replace(/<think>[\s\S]*?<\/think>/g, ""); // remove think part
+        .replace(/.*?<\/think>/, "")
 
       return `<p>${formattedText}</p>`;
     },
